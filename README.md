@@ -1,83 +1,85 @@
-# Image-Classification skin disease detection
-Project Overview
-This project is a web application built using Flask that provides an interface for analyzing images using a machine learning model. The application utilizes the Inference SDK to interact with a remote API for image detection.
+🩺 Skin Disease Detection Web App
 
-Table of Contents
-Features
-Technologies Used
-Installation
-Usage
-File Structure
-License
-Features
-User-friendly web interface for image analysis.
-Integration with the Inference SDK for image detection.
-Ability to upload images for analysis.
-Technologies Used
-Flask: A lightweight WSGI web application framework.
-Inference SDK: For interacting with the image detection API.
-HTML/CSS: For front-end development.
-Python: The programming language used for backend development.
-Installation
-To set up the project locally, follow these steps:
+A lightweight Flask web application that predicts 8 types of skin diseases using image-based inference through a cloud API. Upload an image of a skin condition, and the model returns the predicted disease along with confidence scores.
 
-Clone the repository:
+---
 
-bash
+🔍 Supported Skin Conditions
 
-Verify
+The model can identify the following diseases:
 
-Open In Editor
-Run
-Copy code
-git clone <repository-url>
-cd <repository-directory>
-Create a virtual environment (optional but recommended):
+Acne
 
-bash
+Eczema
 
-Verify
+Herpes Zoster (Shingles)
 
-Open In Editor
-Run
-Copy code
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-Install the required packages:
+Hives
 
-bash
+Lupus
 
-Verify
+Vitiligo
 
-Open In Editor
-Run
-Copy code
-pip install -r requirements.txt
-Usage
-Run the application:
+Raynaud’s Disease
 
-bash
+Tinea (Ringworm)
 
-Verify
+---
 
-Open In Editor
-Run
-Copy code
-python app.py
-Access the application: Open your web browser and go to http://localhost:5000.
+🚀 Features
 
-Upload an image: Use the provided interface to upload an image for analysis.
+✔ Simple and clean web UI
+✔ Image upload support
+✔ Real-time prediction using cloud inference API
+✔ JSON output for easy integration
+✔ Lightweight Flask backend
+✔ Fully deployable on Render / Railway / AWS
 
-File Structure
+---
 
-Verify
+🛠️ Tech Stack
 
-Open In Editor
-Run
-Copy code
-/app.py                # Main application file
-/requirements.txt      # List of dependencies
-/templates/            # Directory for HTML templates
-    /analyze.html      # Template for the analysis page
-    /app.html          # Template for the main app page
-/img                   # Directory for uploaded image
+Frontend: HTML, CSS
+Backend: Flask (Python)
+Model Inference: Roboflow API
+Other Libraries: OpenCV, Pillow, Requests
+Hosting: Render (Gunicorn + Python)
+
+---
+
+📁 Project Structure
+Skin_Disease_Detection/
+│── templates/
+│     ├── analyze.html
+│     ├── app.html
+│── static/
+│── app.py
+│── requirements.txt
+│── Procfile
+│── README.md
+
+---
+
+▶️ How It Works
+
+User uploads a skin image via web interface
+
+Backend sends the image to the cloud model
+
+Model returns detected disease + confidence
+
+Result is shown to the user as JSON or UI output
+
+---
+
+💡 Future Enhancements
+
+Add disease descriptions + treatment suggestions
+
+Multi-image batch support
+
+History of previous detections
+
+Improved UI/UX
+
+Mobile optimized interface
