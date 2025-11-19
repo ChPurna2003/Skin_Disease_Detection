@@ -3,51 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename='app.css')}}">
-    <title>D-Detection</title>
+    <title>Skin Analysis</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #f7f9fc;
+        }
+
+        .container-main {
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .title {
+            text-align: center;
+            font-weight: 700;
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #555;
+            font-size: 18px;
+            margin-bottom: 35px;
+        }
+
+        .upload-card {
+            border: 2px dashed #007bff;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            background: #eef5ff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .upload-card:hover {
+            background: #ddecff;
+        }
+
+        .result-box {
+            background: #fafafa;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #e5e5e5;
+            margin-top: 25px;
+        }
+
+        #diagnosis {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0064d3;
+            text-align: center;
+        }
+
+        .btn-analyze {
+            background-color: #0066ff;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 18px;
+            color: #fff;
+            border: none;
+            margin-top: 20px;
+            display: block;
+            width: 180px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: 0.3s;
+        }
+
+        .btn-analyze:hover {
+            background-color: #0051cc;
+        }
+    </style>
+
 </head>
 <body>
-</svg>
-    <div id="main">
-               
-        <div id="content">
-            <div class="padding-24" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 4px;">
-                <div id="url-wrapper" style="margin-bottom: 20px;">
-                    <div id="upload-zone" class="flex-col" style="font-size: 1.6rem; justify-content: space-between;">
-                        Enter image link:
-                        <form action="" method="" style="width: 100%; display: flex; justify-content: space-between;">
-                            <input type="url" name="" id="url-box">
-                            <input type="button" value="confirm" id="url-submit">
-                        </form>
-                    </div>
-                </div>
-                <div id="image-wrapper" class=" width-100" style="height: 100px; margin-bottom: 16px;">
-                    <div id="upload-file" class="file-upload" style="height: 100%; text-align: center; justify-content: center; padding: 0 18px;">
-                        <label role="button" tabindex="0" style="cursor: pointer;">
-                            <input id="file-input" style="display: none" type="file" accept="image/png, image/jpg, image/jpeg, image/bmp">
-                            <div style="width: 100%;">
-                                <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.3332 3.66671V12C17.3332 12.9167 16.5832 13.6667 15.6665 13.6667H2.33317C1.4165 13.6667 0.666504 12.9167 0.666504 12L0.674837 2.00004C0.674837 1.08337 1.4165 0.333374 2.33317 0.333374H7.33317L8.99984 2.00004H15.6665C16.5832 2.00004 17.3332 2.75004 17.3332 3.66671ZM8.99984 7.00004H10.6665V5.33337H12.3332V7.00004H13.9998V8.66671H12.3332V10.3334H10.6665V8.66671H8.99984V7.00004ZM2.33317 3.66671H15.6665V12H2.33317V3.66671Z" fill="#1967D2"></path>
-                                </svg>
-                                <br>
-                                <!---->Select an image from your folder, or drag&amp; drop here<!---->
-                            </div>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="padding-24" style="height: fit-content; background-color: rgba(0, 0, 0, 0.2); border-radius: 4px; margin-top: 48px; font-size: 26px;">
-                Diagnosis:
-                <div id="loading" class="hide" style="font-size: 16px;">is diagnosing...</div>
-                <div id="result"></div>
-                <div id="display-result">
-                    <img id="image-result" src="" alt="">
-                </div>
-            </div>
+
+    <div class="container-main">
+
+        <h2 class="title">Skin Disease Analyzer</h2>
+        <p class="subtitle">Upload an image and let our AI detect possible skin conditions.</p>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+            <label for="fileInput" class="upload-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png" width="70" class="mb-3">
+                <p><b>Click to select an image</b></p>
+                <p>or drag & drop here</p>
+                <input type="file" id="fileInput" name="file" hidden>
+            </label>
+
+            <button type="submit" class="btn-analyze">Analyze Image</button>
+        </form>
+
+        <div class="result-box">
+            <h4 style="text-align:center;">Diagnosis Result</h4>
+            <p id="diagnosis">Waiting for input...</p>
         </div>
+
     </div>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="{{url_for('static', filename='app.js')}}"></script>
+
+
+<script>
+    const form = document.getElementById("uploadForm");
+    const diagnosisBox = document.getElementById("diagnosis");
+
+    form.addEventListener("submit", async function(e){
+        e.preventDefault();
+
+        const fileInput = document.getElementById("fileInput");
+        if(!fileInput.files[0]) {
+            diagnosisBox.innerText = "Please upload an image!";
+            return;
+        }
+
+        diagnosisBox.innerText = "Analyzing... Please wait.";
+
+        let formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        let res = await fetch("/analyze", {
+            method: "POST",
+            body: formData
+        });
+
+        let data = await res.json();
+
+        if (data.predictions && data.predictions.length > 0) {
+            diagnosisBox.innerText = 
+                data.predictions[0].class.toUpperCase() +
+                " (" + (data.predictions[0].confidence * 100).toFixed(2) + "%)";
+        } else {
+            diagnosisBox.innerText = "No disease detected.";
+        }
+    });
+</script>
+
 </body>
 </html>
