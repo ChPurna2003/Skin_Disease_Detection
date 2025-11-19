@@ -3,54 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skin Analysis</title>
+    <title>D-Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Font (optional but helps match homepage style) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .header-bar {
+            background-color: #007bff;
+            padding: 16px 0;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
-
 <body>
 
-    <!-- ⭐ SAME HEADER AS HOME PAGE -->
-    <nav class="top-header">
-        <div class="logo">Skin Disease Detection</div>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Signup</a></li>
-        </ul>
-    </nav>
-
-    <div class="container-main">
-
-        <h2 class="title">Skin Disease Analyzer</h2>
-        <p class="subtitle">Upload an image and let our AI detect possible skin conditions.</p>
-
-        <form id="uploadForm" enctype="multipart/form-data">
-            <label for="fileInput" class="upload-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png" width="70" class="mb-3">
-                <p><b>Click to select an image</b></p>
-                <p>or drag & drop here</p>
-                <input type="file" id="fileInput" name="file" hidden>
-            </label>
-
-            <button type="submit" class="btn-analyze">Analyze Image</button>
-        </form>
-
-        <div class="result-box">
-            <h4 class="text-center">Diagnosis Result</h4>
-            <p id="diagnosis">Waiting for input...</p>
-        </div>
-
+    <!-- 🔵 Blue Header -->
+    <div class="header-bar">
+        Skin Disease Detection
     </div>
 
-    <!-- JS -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <div id="main">
+        <div id="content">
+            <div class="padding-24" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 4px;">
+                <div id="url-wrapper" style="margin-bottom: 20px;">
+                    <div id="upload-zone" class="flex-col" style="font-size: 1.6rem; justify-content: space-between;">
+                        Enter image link:
+                        <form action="" method="" style="width: 100%; display: flex; justify-content: space-between;">
+                            <input type="url" name="" id="url-box">
+                            <input type="button" value="confirm" id="url-submit">
+                        </form>
+                    </div>
+                </div>
+                <div id="image-wrapper" class=" width-100" style="height: 100px; margin-bottom: 16px;">
+                    <div id="upload-file" class="file-upload" style="height: 100%; text-align: center; justify-content: center; padding: 0 18px;">
+                        <label role="button" tabindex="0" style="cursor: pointer;">
+                            <input id="file-input" style="display: none" type="file" accept="image/png, image/jpg, image/jpeg, image/bmp">
+                            <div style="width: 100%;">
+                                <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.3332 3.66671V12C17.3332 12.9167 16.5832 13.6667 15.6665 13.6667H2.33317C1.4165 13.6667 0.666504 12.9167 0.666504 12L0.674837 2.00004C0.674837 1.08337 1.4165 0.333374 2.33317 0.333374H7.33317L8.99984 2.00004H15.6665C16.5832 2.00004 17.3332 2.75004 17.3332 3.66671ZM8.99984 7.00004H10.6665V5.33337H12.3332V7.00004H13.9998V8.66671H12.3332V10.3334H10.6665V8.66671H8.99984V7.00004ZM2.33317 3.66671H15.6665V12H2.33317V3.66671Z" fill="#1967D2"></path>
+                                </svg>
+                                <br>
+                                Select an image from your folder, or drag & drop here
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="padding-24" style="height: fit-content; background-color: rgba(0, 0, 0, 0.2); border-radius: 4px; margin-top: 48px; font-size: 26px;">
+                Diagnosis:
+                <div id="loading" class="hide" style="font-size: 16px;">is diagnosing...</div>
+                <div id="result"></div>
+                <div id="display-result">
+                    <img id="image-result" src="" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+
 </body>
 </html>
