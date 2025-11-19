@@ -1,111 +1,97 @@
-/* GLOBAL FONT */
+/* Custom styles for the Skin Disease Detection website */
 body {
-    background-color: #f7f9fc;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f7fafc; /* Tailwind's bg-gray-100 */
 }
 
-/* ⭐ SAME HEADER AS HOME PAGE */
-.top-header {
-    width: 100%;
-    background: #007bff;
+header {
+    background-color: #2563eb; /* Tailwind's bg-blue-600 */
     color: white;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
-.top-header .logo {
-    font-size: 22px;
-    font-weight: 600;
+h1, h2, h3, h4 {
+    margin: 0;
 }
 
-.top-header .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 22px;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
-.top-header .nav-links a {
-    color: white;
-    font-size: 15px;
-    text-decoration: none;
-    font-weight: 500;
+.border-dashed {
+    border-style: dashed;
 }
 
-.top-header .nav-links a:hover {
+.rounded-lg {
+    border-radius: 0.5rem; /* Tailwind's rounded-lg */
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.hover\:underline:hover {
     text-decoration: underline;
 }
 
-/* PAGE CONTENT */
-.container-main {
-    max-width: 750px;
-    margin: 40px auto;
-    padding: 30px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+.bg-blue-600 {
+    background-color: #2563eb; /* Tailwind's blue-600 */
 }
 
-.title {
-    text-align: center;
-    font-weight: 700;
-    font-size: 32px;
-    margin-bottom: 10px;
-    color: #333;
+.bg-blue-700:hover {
+    background-color: #1d4ed8; /* Tailwind's blue-700 */
 }
 
-.subtitle {
-    text-align: center;
-    color: #555;
-    font-size: 18px;
-    margin-bottom: 35px;
+.text-gray-700 {
+    color: #4a5568; /* Tailwind's text-gray-700 */
 }
 
-.upload-card {
-    border: 2px dashed #007bff;
-    border-radius: 15px;
-    padding: 40px;
-    text-align: center;
-    background: #eef5ff;
-    cursor: pointer;
-    transition: 0.3s;
+.fixed {
+    position: fixed;
 }
 
-.upload-card:hover {
-    background: #ddecff;
+.hidden {
+    display: none;
 }
 
-.result-box {
-    background: #fafafa;
-    border-radius: 15px;
-    padding: 25px;
-    border: 1px solid #e5e5e5;
-    margin-top: 25px;
+.text-white {
+    color: white;
 }
 
-#diagnosis {
-    font-size: 20px;
-    font-weight: 600;
-    color: #0064d3;
-    text-align: center;
+.text-lg {
+    font-size: 1.125rem; /* Tailwind's text-lg */
 }
 
-.btn-analyze {
-    background-color: #0066ff;
-    padding: 12px 25px;
-    border-radius: 10px;
-    font-size: 18px;
-    color: #fff;
-    border: none;
-    margin-top: 20px;
-    display: block;
-    width: 180px;
-    margin-left: auto;
-    margin-right: auto;
-    transition: 0.3s;
+.text-2xl {
+    font-size: 1.5rem; /* Tailwind's text-2xl */
 }
 
-.btn-analyze:hover {
-    background-color: #0051cc;
+.text-3xl {
+    font-size: 1.875rem; /* Tailwind's text-3xl */
+}
+
+.p-4 {
+    padding: 1rem; /* Tailwind's p-4 */
+}
+
+.p-2 {
+    padding: 0.5rem; /* Tailwind's p-2 */
+}
+
+.rounded-full {
+    border-radius: 9999px; /* Tailwind's rounded-full */
+}
+
+.w-full {
+    width: 100%;
+}
+
+.overflow-y-auto {
+    overflow-y: auto;
+}
+
+.redirect-button{
+    border: 2px solid blue;
+    padding: 10px;
 }
