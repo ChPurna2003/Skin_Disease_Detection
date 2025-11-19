@@ -83,7 +83,6 @@
             background-color: #0051cc;
         }
     </style>
-
 </head>
 <body>
 
@@ -114,11 +113,15 @@
 <script>
     const form = document.getElementById("uploadForm");
     const diagnosisBox = document.getElementById("diagnosis");
+    const fileInput = document.getElementById("fileInput");
+
+    fileInput.addEventListener("change", () => {
+        diagnosisBox.innerText = "Image selected. Click Analyze.";
+    });
 
     form.addEventListener("submit", async function(e){
         e.preventDefault();
 
-        const fileInput = document.getElementById("fileInput");
         if(!fileInput.files[0]) {
             diagnosisBox.innerText = "Please upload an image!";
             return;
@@ -137,7 +140,7 @@
         let data = await res.json();
 
         if (data.predictions && data.predictions.length > 0) {
-            diagnosisBox.innerText = 
+            diagnosisBox.innerText =
                 data.predictions[0].class.toUpperCase() +
                 " (" + (data.predictions[0].confidence * 100).toFixed(2) + "%)";
         } else {
