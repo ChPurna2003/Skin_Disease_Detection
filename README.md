@@ -26,6 +26,9 @@ Tinea (Ringworm)
 
 ---
 
+Live Demo :https://skin-disease-detection-j524.onrender.com
+
+---
 🚀 Features
 
 ✔ Simple and clean web UI
