@@ -4,86 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skin Analysis</title>
+
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 
-    <style>
-        body {
-            background-color: #f7f9fc;
-        }
-
-        .container-main {
-            max-width: 750px;
-            margin: 40px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-
-        .title {
-            text-align: center;
-            font-weight: 700;
-            font-size: 32px;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #555;
-            font-size: 18px;
-            margin-bottom: 35px;
-        }
-
-        .upload-card {
-            border: 2px dashed #007bff;
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            background: #eef5ff;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .upload-card:hover {
-            background: #ddecff;
-        }
-
-        .result-box {
-            background: #fafafa;
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid #e5e5e5;
-            margin-top: 25px;
-        }
-
-        #diagnosis {
-            font-size: 20px;
-            font-weight: 600;
-            color: #0064d3;
-            text-align: center;
-        }
-
-        .btn-analyze {
-            background-color: #0066ff;
-            padding: 12px 25px;
-            border-radius: 10px;
-            font-size: 18px;
-            color: #fff;
-            border: none;
-            margin-top: 20px;
-            display: block;
-            width: 180px;
-            margin-left: auto;
-            margin-right: auto;
-            transition: 0.3s;
-        }
-
-        .btn-analyze:hover {
-            background-color: #0051cc;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
     <div class="container-main">
@@ -103,51 +31,13 @@
         </form>
 
         <div class="result-box">
-            <h4 style="text-align:center;">Diagnosis Result</h4>
+            <h4 class="text-center">Diagnosis Result</h4>
             <p id="diagnosis">Waiting for input...</p>
         </div>
 
     </div>
 
-
-<script>
-    const form = document.getElementById("uploadForm");
-    const diagnosisBox = document.getElementById("diagnosis");
-    const fileInput = document.getElementById("fileInput");
-
-    fileInput.addEventListener("change", () => {
-        diagnosisBox.innerText = "Image selected. Click Analyze.";
-    });
-
-    form.addEventListener("submit", async function(e){
-        e.preventDefault();
-
-        if(!fileInput.files[0]) {
-            diagnosisBox.innerText = "Please upload an image!";
-            return;
-        }
-
-        diagnosisBox.innerText = "Analyzing... Please wait.";
-
-        let formData = new FormData();
-        formData.append("file", fileInput.files[0]);
-
-        let res = await fetch("/analyze", {
-            method: "POST",
-            body: formData
-        });
-
-        let data = await res.json();
-
-        if (data.predictions && data.predictions.length > 0) {
-            diagnosisBox.innerText =
-                data.predictions[0].class.toUpperCase() +
-                " (" + (data.predictions[0].confidence * 100).toFixed(2) + "%)";
-        } else {
-            diagnosisBox.innerText = "No disease detected.";
-        }
-    });
-</script>
-
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
