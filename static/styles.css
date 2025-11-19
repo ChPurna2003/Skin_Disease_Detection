@@ -4,19 +4,40 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* HEADER BAR (same as homepage) */
-.header-bar {
+/* ⭐ SAME HEADER AS HOME PAGE */
+.top-header {
     width: 100%;
     background: #007bff;
-    padding: 15px 20px;
-    text-align: center;
     color: white;
-    font-size: 20px;
-    font-weight: 600;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Existing UI styling */
+.top-header .logo {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.top-header .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+}
+
+.top-header .nav-links a {
+    color: white;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.top-header .nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* PAGE CONTENT */
 .container-main {
     max-width: 750px;
     margin: 40px auto;
