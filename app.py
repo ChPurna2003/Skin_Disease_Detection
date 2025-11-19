@@ -5,10 +5,9 @@ import os
 app = Flask(__name__)
 
 # ------------------------------
-# Roboflow Public Skin Model
+# Roboflow model endpoint
 # ------------------------------
-
-API_KEY = "kTK0gAawSv3eqEDeXfAs"    # your API key
+API_KEY = "kTK0gAawSv3eqEDeXfAs"
 MODEL_ENDPOINT = "https://detect.roboflow.com/skin-disease-8class/1"
 
 
@@ -17,23 +16,21 @@ def dash():
     return render_template('analyze.html')
 
 
-@app.route("/analyze", methods=['GET', 'POST'])
+@app.route("/analyze", methods=["GET", "POST"])
 def analyze():
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            return jsonify({"error": "No file uploaded"})
+    if request.method == "POST":
 
-        file = request.files['file']
+        if "file" not in request.files:
+            return jsonify({"error": "No file received"})
 
-        # save file temporarily
+        file = request.files["file"]
         temp_path = "temp.jpg"
         file.save(temp_path)
 
-        # send request to Roboflow
+        # send to roboflow
         url = f"{MODEL_ENDPOINT}?api_key={API_KEY}"
-        response = requests.post(url, files={'file': open(temp_path, 'rb')})
+        response = requests.post(url, files={"file": open(temp_path, "rb")})
 
-        # remove temp file
         os.remove(temp_path)
 
         try:
@@ -41,8 +38,7 @@ def analyze():
         except:
             return jsonify({"error": "Prediction failed"})
 
-
-    return render_template('app.html')
+    return render_template("app.html")
 
 
 @app.route('/favicon.ico')
@@ -51,4 +47,4 @@ def favicon():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+   app.run(host='0.0.0.0', port=5000)
