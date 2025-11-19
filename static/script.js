@@ -1,36 +1,27 @@
-const form = document.getElementById("uploadForm");
-const diagnosisBox = document.getElementById("diagnosis");
-const fileInput = document.getElementById("fileInput");
-
-fileInput.addEventListener("change", () => {
-    diagnosisBox.innerText = "Image selected. Click Analyze.";
+// JavaScript for the chatbot functionality
+document.getElementById('chatbotButton').addEventListener('click', function() {
+    document.getElementById('chatbotContainer').classList.toggle('hidden');
 });
 
-form.addEventListener("submit", async function(e) {
-    e.preventDefault();
+document.getElementById('closeChatbot').addEventListener('click', function() {
+    document.getElementById('chatbotContainer').classList.add('hidden');
+});
 
-    if (!fileInput.files[0]) {
-        diagnosisBox.innerText = "Please upload an image!";
-        return;
+document.getElementById('sendChatbotMessage').addEventListener('click', function() {
+    const input = document.getElementById('chatbotInput');
+    const message = input.value.trim();
+    if (message) {
+        const messageContainer = document.createElement('div');
+        messageContainer.classList.add('text-gray-700', 'mb-2');
+        messageContainer.innerHTML = `<p>${message}</p>`;
+        document.getElementById('chatbotMessages').appendChild(messageContainer);
+        input.value = '';
+        document.getElementById('chatbotMessages').scrollTop = document.getElementById('chatbotMessages').scrollHeight;
     }
+});
 
-    diagnosisBox.innerText = "Analyzing... Please wait.";
-
-    let formData = new FormData();
-    formData.append("file", fileInput.files[0]);
-
-    let res = await fetch("/analyze", {
-        method: "POST",
-        body: formData
-    });
-
-    let data = await res.json();
-
-    if (data.predictions && data.predictions.length > 0) {
-        diagnosisBox.innerText =
-            data.predictions[0].class.toUpperCase() +
-            " (" + (data.predictions[0].confidence * 100).toFixed(2) + "%)";
-    } else {
-        diagnosisBox.innerText = "No disease detected.";
+document.getElementById('chatbotInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        document.getElementById('sendChatbotMessage').click();
     }
 });
