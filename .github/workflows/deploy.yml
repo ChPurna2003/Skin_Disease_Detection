@@ -2,23 +2,27 @@ name: Deploy
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - uses: appleboy/ssh-action@v0.1.6
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ubuntu
-        key: ${{ secrets.EC2_KEY }}
-        script: |
-          cd Skin_Disease_Detection
-          git pull
-          sudo docker stop $(sudo docker ps -q) || true
-          sudo docker build -t skin-app .
-          sudo docker run -d -p 5000:5000 skin-app
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            cd Skin_Disease_Detection || git clone https://github.com/ChPurna2003/Skin_Disease_Detection.git
+            cd Skin_Disease_Detection
+            git pull
+            sudo docker stop $(sudo docker ps -q) || true
+            sudo docker build -t skin-app .
+            sudo docker run -d -p 5000:5000 skin-app
