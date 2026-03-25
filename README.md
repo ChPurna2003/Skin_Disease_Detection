@@ -1,88 +1,44 @@
-🩺 Skin Disease Detection Web App
+#  Skin Disease Detection App
 
-A lightweight Flask web application that predicts 8 types of skin diseases using image-based inference through a cloud API. Upload an image of a skin condition, and the model returns the predicted disease along with confidence scores.
+This is a simple web application that detects skin diseases from uploaded images using a computer vision model.
 
----
-
-🔍 Supported Skin Conditions
-
-The model can identify the following diseases:
-
-Acne
-
-Eczema
-
-Herpes Zoster (Shingles)
-
-Hives
-
-Lupus
-
-Vitiligo
-
-Raynaud’s Disease
-
-Tinea (Ringworm)
+I built this project to learn how to take an AI model and actually deploy it like a real-world application using AWS and DevOps tools.
 
 ---
 
-Live Demo :https://skin-disease-detection-j524.onrender.com
+## Live Demo
 
----
-🚀 Features
-
-✔ Simple and clean web UI
-✔ Image upload support
-✔ Real-time prediction using cloud inference API
-✔ JSON output for easy integration
-✔ Lightweight Flask backend
-✔ Fully deployable on Render / Railway / AWS
+👉 http://13.232.191.7:5000
 
 ---
 
-🛠️ Tech Stack
+##  Tech Stack
 
-Frontend: HTML, CSS
-Backend: Flask (Python)
-Model Inference: Roboflow API
-Other Libraries: OpenCV, Pillow, Requests
-Hosting: Render (Gunicorn + Python)
-
----
-
-📁 Project Structure
-Skin_Disease_Detection/
-│── templates/
-│     ├── analyze.html
-│     ├── app.html
-│── static/
-│── app.py
-│── requirements.txt
-│── Procfile
-│── README.md
+- Python
+- Flask
+- Docker
+- AWS EC2
+- GitHub Actions (CI/CD)
+- Roboflow API (for model predictions)
 
 ---
 
-▶️ How It Works
+##  How It Works
 
-User uploads a skin image via web interface
-
-Backend sends the image to the cloud model
-
-Model returns detected disease + confidence
-
-Result is shown to the user as JSON or UI output
+1. User uploads an image through the web interface  
+2. Flask backend receives the image  
+3. Image is sent to Roboflow API  
+4. Model returns prediction  
+5. Result is shown to the user  
 
 ---
 
-💡 Future Enhancements
+## 🐳 Docker Setup
 
-Add disease descriptions + treatment suggestions
+Build the image:
 
-Multi-image batch support
+```bash
+docker build -t skin-app .
 
-History of previous detections
 
-Improved UI/UX
-
-Mobile optimized interface
+Run the container: docker run -d -p 5000:5000 skin-app
